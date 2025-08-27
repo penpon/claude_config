@@ -1,0 +1,101 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(diff:*)",
+      "Bash(mkdir:*)",
+      "Bash(cat:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge:*)",
+      "Bash(git worktree:*)",
+      "Bash(git branch:*)",
+      "Bash(git config:*)",
+      "Bash(git push:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git status:*)",
+      "Bash(git rev-list:*)",
+      "Bash(git show:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(docker compose:*)",
+      "Bash(docker compose exec:*)",
+      "Bash(docker compose logs:*)",
+      "Bash(afplay:*)",
+      "Bash(gh issue comment:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh repo view:*)",
+      "Bash(echo:*)",
+      "Bash(osascript:*)",
+      "Bash(pwd:*)",
+      "Bash(cd:*)",
+      "Bash(date:*)",
+      "Bash(tac:*)",
+      "Bash(wc:*)",
+      "Bash(tr:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "Bash(gh label:*)",
+      "Bash(env)",
+      "WebFetch(domain:github.com)",
+      "Bash(sqlite3:*)",
+      "Bash(unset USE_DATABASE)",
+      "Bash(export USE_DATABASE=true)",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(cp:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": [
+      "Bash(sudo:*)",
+      "Bash(rm -rf:*)",
+      "Bash(git reset:*)",
+      "Bash(git rebase:*)",
+      "Read(.env.*)",
+      "Read(id_rsa)",
+      "Read(id_ed25519)",
+      "Read(**/*token*)",
+      "Write(.env*)",
+      "Write(**/secrets/**)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm remove:*)"
+    ],
+    "defaultMode": "default"
+  },
+  "model": "opusplan",
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /Users/XXXX/notification.wav"
+          },
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Code\u901a\u77e5\" with title \"\u898b\u3066\u306d\uff01\" sound name \"Glass\"'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/auto-format.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
